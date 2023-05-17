@@ -1,8 +1,8 @@
 import React from 'react';
 import LeftSideBar from './LeftSideBar/LeftSideBar';
-import NewsComponent from './NewsComponent/NewsComponent';
 import { Col, Row } from 'react-bootstrap';
 import RightSideBar from '../SharedComponents/RightSideBar/RightSideBar';
+import { Outlet } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -12,7 +12,7 @@ const Home = () => {
                     <LeftSideBar />
                 </Col>
                 <Col lg={6}>
-                    <NewsComponent />
+                    <Outlet />
                 </Col>
                 <Col lg={3}>
                     <RightSideBar />

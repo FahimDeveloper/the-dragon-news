@@ -3,7 +3,7 @@ import logo from "../../../assets/logo.png"
 import moment from 'moment/moment';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import Marquee from "react-fast-marquee";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -29,8 +29,9 @@ const Header = () => {
                             <NavLink to="/" className="text-decoration-none text-dark fs-5">Career</NavLink>
                         </Nav>
                         <Nav className='align-items-center gap-2'>
-                            <p className='m-0'>User</p>
-                            <Button variant='dark'>Login</Button>
+                            <Link to="/login">
+                                <Button variant='dark'>Login</Button>
+                            </Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
