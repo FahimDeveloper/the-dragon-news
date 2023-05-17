@@ -7,6 +7,7 @@ import EditorsCart from './EditorsCart';
 
 const NewsDetails = () => {
     const data = useLoaderData();
+
     return (
         <div>
             <Row>

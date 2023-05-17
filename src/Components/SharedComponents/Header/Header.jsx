@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from "../../../assets/logo.png"
 import moment from 'moment/moment';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import Marquee from "react-fast-marquee";
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../provider/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext)
+    const handleLogOut = () => {
+        logOut().then(() => console.log('Log out')).catch(error => error.message)
+    }
     return (
         <div>
             <div className='text-center'>
@@ -24,14 +29,20 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mx-auto gap-4">
-                            <NavLink to="/" className="text-decoration-none text-dark fs-5">Home</NavLink>
-                            <NavLink to="/" className="text-decoration-none text-dark fs-5">About</NavLink>
-                            <NavLink to="/" className="text-decoration-none text-dark fs-5">Career</NavLink>
+                            <NavLink to="/categories/0" className="text-decoration-none text-dark fs-5">Home</NavLink>
+                            <NavLink to="/categories/0" className="text-decoration-none text-dark fs-5">About</NavLink>
+                            <NavLink to="/categories/0" className="text-decoration-none text-dark fs-5">Career</NavLink>
                         </Nav>
                         <Nav className='align-items-center gap-2'>
-                            <Link to="/login">
-                                <Button variant='dark'>Login</Button>
-                            </Link>
+                            <img style={{ width: "50px" }} className='rounded-circle' src={user?.photoURL} alt="" />
+                            {
+                                user
+                                    ? <Button onClick={handleLogOut} variant='dark'>Log out</Button>
+                                    : <Link to="/login">
+                                        <Button variant='dark'>Login</Button>
+                                    </Link>
+
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

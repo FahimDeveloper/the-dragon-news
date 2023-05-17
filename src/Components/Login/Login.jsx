@@ -1,21 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
-    const { loginUserWithEmail, setUser } = useContext(AuthContext)
+    const { loginUserWithEmail, resetPassword } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || "/categories/0";
+    console.log(location)
+    const mail = useRef();
     const handleSubmit = (event) => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         loginUserWithEmail(email, password)
             .then(result => {
                 const user = result.user;
-                setUser(user);
-                console.log(user);
+                navigate(from)
                 event.target.reset();
             }).catch(error => console.log(error.message))
         event.preventDefault();
+    }
+    const handleResetPassword = (event) => {
+        const email = mail.current.value;
+        if (email) {
+            resetPassword(email).then(() => alert("please check your email")).catch(error => error.message)
+        }
     }
     return (
         <div className='w-50 mx-auto border p-5 rounded-3'>
@@ -23,7 +33,7 @@ const Login = () => {
             <Form onSubmit={handleSubmit} className='mt-5'>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name="email" placeholder="Enter email" />
+                    <Form.Control type="email" ref={mail} name="email" placeholder="Enter email" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -31,7 +41,7 @@ const Login = () => {
                     <Form.Control type="password" name="password" placeholder="Password" />
                 </Form.Group>
                 <Form.Group className="mb-3 text-end" controlId="formBasicCheckbox">
-                    <p style={{ cursor: "pointer" }}>Forgot password</p>
+                    <p onClick={handleResetPassword} style={{ cursor: "pointer" }}>Forgot password</p>
                 </Form.Group>
                 <Button variant="dark" type="submit" className="btn-lg w-100">
                     Login

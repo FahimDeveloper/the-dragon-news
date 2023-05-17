@@ -5,6 +5,8 @@ import NewsComponent from "../Components/Home/NewsComponent/NewsComponent";
 import NewsDetails from "../Components/NewsDetails/NewsDetails";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import AllPrivetRoute from "./AllPrivetRoute";
+import PrivetAuthRoute from "./PrivetAuthRoute";
 
 const router = createBrowserRouter([
     {
@@ -24,11 +26,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/:id/newsdetails',
-                element: <NewsDetails />,
+                element: <AllPrivetRoute>
+                    <NewsDetails />
+                </AllPrivetRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/${params.id}/newsdetails`)
             },
-            { path: "/login", element: <Login /> },
-            { path: "/register", element: <Register /> },
+            { path: "/login", element: <PrivetAuthRoute><Login /></PrivetAuthRoute> },
+            { path: "/register", element: <PrivetAuthRoute><Register /></PrivetAuthRoute> },
         ]
     },
 ])

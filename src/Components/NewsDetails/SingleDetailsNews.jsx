@@ -4,7 +4,6 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 
 const SingleDetailsNews = ({ newsDetails }) => {
-    console.log(newsDetails)
     const { image_url, title, details, category_id } = newsDetails;
     return (
         <div>

@@ -2,11 +2,12 @@ import React from 'react';
 import LeftSideBar from './LeftSideBar/LeftSideBar';
 import { Col, Row } from 'react-bootstrap';
 import RightSideBar from '../SharedComponents/RightSideBar/RightSideBar';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 const Home = () => {
     return (
         <div>
+            <Navigate to="/categories/0" />
             <Row>
                 <Col lg={3}>
                     <LeftSideBar />
