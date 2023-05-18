@@ -20,7 +20,7 @@ const router = createBrowserRouter([
                     {
                         path: '/categories/:id',
                         element: <NewsComponent />,
-                        loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
+                        loader: ({ params }) => fetch(`https://the-dragon-news-server-two-tau.vercel.app/categories/${params.id}`)
                     }
                 ]
             },
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
                 element: <AllPrivetRoute>
                     <NewsDetails />
                 </AllPrivetRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/${params.id}/newsdetails`)
+                loader: ({ params }) => fetch(`https://the-dragon-news-server-two-tau.vercel.app/${params.id}/newsdetails`)
             },
             { path: "/login", element: <PrivetAuthRoute><Login /></PrivetAuthRoute> },
             { path: "/register", element: <PrivetAuthRoute><Register /></PrivetAuthRoute> },
