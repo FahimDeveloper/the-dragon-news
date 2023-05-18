@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Register = () => {
     const { newUserWithEmail, setUser } = useContext(AuthContext);
+    const [accept, setAccept] = useState(false);
     const handleSubmit = (event) => {
         const name = event.target.name.value;
         const email = event.target.email.value;
@@ -40,7 +41,10 @@ const Register = () => {
                         <Form.Label>Photo URL</Form.Label>
                         <Form.Control type="text" name="photo" placeholder="Photo url" />
                     </Form.Group>
-                    <Button variant="dark" type="submit" className="w-100 btn-lg">
+                    <Form.Group className="mb-3" controlId="formBasicCheckBox">
+                        <Form.Check onClick={() => setAccept(!accept)} type="checkbox" name="accept" label="Accept Terms and condition" />
+                    </Form.Group>
+                    <Button variant="dark" type="submit" className={`btn-lg w-100 ${accept ? "" : "disabled"}`}>
                         Register
                     </Button>
                 </Form>
